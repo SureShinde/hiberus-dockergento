@@ -213,11 +213,12 @@ custom_select() {
     local opts=("$@")
 
     for i in "${!opts[@]}"; do
-        opts[$i]=$(print_table "${opts[$i]}")
+        opts[$i]=$(print_options "${opts[$i]}")
     done
     COLUMNS=1
-    PS3="$(print_default "Option: ")"
-    print_question "\n✅ $question\n"
+    PS3="$(print_highlight "\n   Option: ")"
+    print_info "\n[√] "
+    print_question "$question\n"
     select REPLY in "${opts[@]}"; do
         if [[ " ${opts[@]} " ==  *" $REPLY "* ]]; then
             # Remove color codes from selected option
@@ -226,6 +227,7 @@ custom_select() {
             break
         fi
         print_warning "\nInvalid option, choose an option\n"
-        print_question "\n✅ $question\n"
+        print_info "\n[√] "
+        print_question "$question\n"
     done
 }

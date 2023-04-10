@@ -16,6 +16,10 @@ print_question() {
     fi
 }
 
+print_options() {
+    printf "$CYAN%b$COLOR_RESET" "$1"
+}
+
 print_info() {
     printf "$GREEN%b$COLOR_RESET" "$1"
 }
